@@ -1,8 +1,10 @@
 #pragma once
-#include "GameObject.h"
+#include "GameObject.hpp"
+#include "Projectile.h"
 class Enemy :
 	public GameObject
 {	
+    sf::Clock shootClock;
 
 public:
 	Enemy(const sf::Texture& texture, const sf::IntRect& rect, const sf::Vector2f& pos) :
@@ -15,9 +17,10 @@ public:
 		)
 	{}
 	~Enemy();
-
+    //sf::Vector2f getPosition
 	bool isOutOfBound() { return false; }
 
+    Projectile* shoot();
 	
 };
 

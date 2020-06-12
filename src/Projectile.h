@@ -1,25 +1,35 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 #include <SFML/Graphics.hpp>
-#include "GameObject.h"
+#include "GameObject.hpp"
+#include "PlanetDefenders.h"
 
+using PlanetDefenders::ProjectileType;
 
 class Projectile : public GameObject
 {
 
+    float damage;
+    ProjectileType type;
+
 public:
     static int PROJECTILE_COUNTER;
 
-    Projectile(const sf::Texture& texture, const sf::IntRect& rect, const sf::Vector2f& pos) :
+    Projectile(const sf::Texture& texture, const sf::IntRect& rect,
+        const sf::Vector2f& pos, sf::Vector2f dir = sf::Vector2f(0, -1.0f),
+        float spd = 10, float damage = 1.0f, ProjectileType type = ProjectileType::BlueRegular) :
         GameObject(
             texture,
             rect,
             pos,
-            sf::Vector2f(0, -1.0f),
-            5.0f		// Initial speed
-        )
+            dir,
+            spd
+        ), damage(damage), type(type)
     {}
 
+    void setDamage(float d) { damage = d; }
+    float getDamage() { return damage; }
+    ProjectileType getType() { return type; }
     ~Projectile();
 
 };
